@@ -1,0 +1,333 @@
+<div class="dd-steps-panel">
+
+  {{!-- ── Master toggle ── --}}
+  <div class="dd-steps-master">
+    <div class="dd-steps-toggle-row">
+      <div class="dd-steps-toggle-label">
+        <i class="fas fa-shoe-prints"></i>
+        <span>{{localize "DRAMADIRECTOR.steps.enable"}}</span>
+      </div>
+      <label class="dd-steps-switch">
+        <input type="checkbox" id="dd-steps-enabled">
+        <span class="dd-switch-track"></span>
+      </label>
+    </div>
+    <p class="dd-hint-block" style="margin-top:.3rem">
+      <i class="fas fa-info-circle"></i> {{localize "DRAMADIRECTOR.steps.hint"}}
+    </p>
+  </div>
+
+  {{!-- ── Tabs ── --}}
+  <div class="dd-steps-tabs dd-tp-tabs">
+    <button type="button" class="dd-tp-tab active" data-tab="surface">
+      <i class="fas fa-map"></i> {{localize "DRAMADIRECTOR.steps.surface"}}
+    </button>
+    <button type="button" class="dd-tp-tab" data-tab="settings">
+      <i class="fas fa-sliders-h"></i> {{localize "DRAMADIRECTOR.steps.settings"}}
+    </button>
+    <button type="button" class="dd-tp-tab" data-tab="regions">
+      <i class="fas fa-draw-polygon"></i> {{localize "DRAMADIRECTOR.steps.regions"}}
+    </button>
+  </div>
+
+  <div class="dd-steps-tab-body">
+
+    {{!-- ══ TAB: SURFACE ══ --}}
+    <div class="dd-steps-tab-panel" data-tab-panel="surface">
+
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-grip-horizontal"></i> {{localize "DRAMADIRECTOR.steps.surface"}}</h3>
+        <div id="dd-steps-builtin-grid" class="dd-steps-surface-grid"></div>
+      </div>
+
+      <div class="dd-panel-section">
+        <div class="dd-section-header" style="margin-bottom:.4rem">
+          <h3><i class="fas fa-folder-open"></i> {{localize "DRAMADIRECTOR.steps.customSurface"}}</h3>
+          <label class="dd-checkbox-label" style="margin:0">
+            <input type="checkbox" id="dd-steps-use-custom">
+            <span style="font-size:11px">{{localize "DRAMADIRECTOR.steps.useCustom"}}</span>
+          </label>
+        </div>
+        <div id="dd-steps-custom-row" style="display:none;flex-direction:column;gap:4px">
+          <div class="dd-row">
+            <span class="dd-steps-file-label">L</span>
+            <input type="text" id="dd-steps-custom-url" class="dd-input" placeholder="{{localize "DRAMADIRECTOR.steps.customUrlPlaceholder"}}" style="flex:1">
+            <button type="button" class="dd-icon-btn" id="dd-steps-browse-1"><i class="fas fa-folder-open"></i></button>
+            <button type="button" class="dd-icon-btn dd-play-btn" id="dd-steps-test-1"><i class="fas fa-play"></i></button>
+          </div>
+          <div class="dd-row">
+            <span class="dd-steps-file-label">R</span>
+            <input type="text" id="dd-steps-custom-url2" class="dd-input" placeholder="{{localize "DRAMADIRECTOR.steps.customUrlPlaceholder2"}}" style="flex:1">
+            <button type="button" class="dd-icon-btn" id="dd-steps-browse-2"><i class="fas fa-folder-open"></i></button>
+            <button type="button" class="dd-icon-btn dd-play-btn" id="dd-steps-test-2"><i class="fas fa-play"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-star"></i> {{localize "DRAMADIRECTOR.steps.presets"}}</h3>
+        <div id="dd-steps-presets-list" class="dd-steps-presets-list"></div>
+        <div class="dd-steps-preset-save-row">
+          <input type="text" id="dd-steps-preset-name" class="dd-input" placeholder="{{localize "DRAMADIRECTOR.steps.presetName"}}" style="flex:1">
+          <button type="button" class="dd-icon-btn" id="dd-steps-preset-save" title="{{localize "DRAMADIRECTOR.steps.presetSave"}}">
+            <i class="fas fa-save"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    {{!-- ══ TAB: SETTINGS ══ --}}
+    <div class="dd-steps-tab-panel" data-tab-panel="settings" style="display:none">
+
+      {{!-- Volume --}}
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-volume-up"></i> Volume</h3>
+        <div class="dd-steps-volume-grid">
+          <div class="dd-steps-vol-block">
+            <div class="dd-steps-vol-header">
+              <i class="fas fa-users"></i>
+              <span>{{localize "DRAMADIRECTOR.steps.volumeAll"}}</span>
+            </div>
+            <div class="dd-slider-row">
+              <input type="range"  class="dd-slider" id="dd-steps-vol-all-range" min="0" max="1" step="0.05" value="0.8">
+              <input type="number" class="dd-slider-num dd-input" id="dd-steps-vol-all" min="0" max="1" step="0.05" value="0.8">
+            </div>
+          </div>
+          <div class="dd-steps-vol-block">
+            <div class="dd-steps-vol-header">
+              <i class="fas fa-user-shield"></i>
+              <span>{{localize "DRAMADIRECTOR.steps.volumeGM"}}</span>
+              <label class="dd-checkbox-label dd-steps-mute-lbl" title="{{localize "DRAMADIRECTOR.steps.muteGM"}}">
+                <input type="checkbox" id="dd-steps-mute-gm">
+                <span><i class="fas fa-volume-mute"></i></span>
+              </label>
+            </div>
+            <div class="dd-slider-row">
+              <input type="range"  class="dd-slider" id="dd-steps-vol-gm-range" min="0" max="1" step="0.05" value="0.7">
+              <input type="number" class="dd-slider-num dd-input" id="dd-steps-vol-gm" min="0" max="1" step="0.05" value="0.7">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{!-- Step frequency & fade --}}
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-shoe-prints"></i> Timing</h3>
+
+        <div class="dd-steps-interval-row">
+          <span class="dd-label">{{localize "DRAMADIRECTOR.steps.cellInterval"}}</span>
+          <div class="dd-steps-interval-btns">
+            <button type="button" class="dd-steps-interval-btn" data-interval="1">{{localize "DRAMADIRECTOR.steps.everyCell"}}</button>
+            <button type="button" class="dd-steps-interval-btn" data-interval="2">{{localize "DRAMADIRECTOR.steps.every2Cells"}}</button>
+            <button type="button" class="dd-steps-interval-btn" data-interval="3">{{localize "DRAMADIRECTOR.steps.every3Cells"}}</button>
+          </div>
+        </div>
+
+        <div class="dd-steps-fade-row" style="margin-top:.5rem">
+          <span class="dd-label"><i class="fas fa-water"></i> {{localize "DRAMADIRECTOR.steps.fadeDuration"}}</span>
+          <div class="dd-steps-fade-inputs">
+            <input type="range"  class="dd-slider" id="dd-steps-fade-range" min="50" max="2000" step="10">
+            <input type="number" class="dd-slider-num dd-input" id="dd-steps-fade-ms" min="50" max="2000" step="10">
+            <span class="dd-steps-fade-unit">ms</span>
+          </div>
+          <p class="dd-hint-block" style="font-size:.7rem;margin-top:.25rem;opacity:.7">
+            <i class="fas fa-info-circle"></i> {{localize "DRAMADIRECTOR.steps.fadeDurationHint"}}
+          </p>
+        </div>
+      </div>
+
+      {{!-- Audio quality --}}
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-magic"></i> Audio</h3>
+
+        <div class="dd-steps-realistic-row">
+          <div class="dd-steps-realistic-label">
+            <i class="fas fa-random"></i>
+            <div>
+              <strong>{{localize "DRAMADIRECTOR.steps.realistic"}}</strong>
+              <span class="dd-steps-realistic-desc">{{localize "DRAMADIRECTOR.steps.realisticDesc"}}</span>
+            </div>
+          </div>
+          <label class="dd-steps-switch">
+            <input type="checkbox" id="dd-steps-realistic">
+            <span class="dd-switch-track"></span>
+          </label>
+        </div>
+
+        <div id="dd-steps-realistic-level-row" class="dd-steps-level-row">
+          <span class="dd-slider-label">{{localize "DRAMADIRECTOR.steps.realisticLevel"}}</span>
+          <div class="dd-steps-level-btns">
+            <button type="button" class="dd-steps-level-btn" data-level="low">
+              <i class="fas fa-volume-down"></i> {{localize "DRAMADIRECTOR.steps.levelLow"}}
+              <span class="dd-steps-level-hint">±5%</span>
+            </button>
+            <button type="button" class="dd-steps-level-btn" data-level="medium">
+              <i class="fas fa-sliders-h"></i> {{localize "DRAMADIRECTOR.steps.levelMedium"}}
+              <span class="dd-steps-level-hint">±15%</span>
+            </button>
+            <button type="button" class="dd-steps-level-btn" data-level="high">
+              <i class="fas fa-volume-up"></i> {{localize "DRAMADIRECTOR.steps.levelHigh"}}
+              <span class="dd-steps-level-hint">±30%</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dd-steps-realistic-row" style="margin-top:.6rem">
+          <div class="dd-steps-realistic-label">
+            <i class="fas fa-headphones"></i>
+            <div>
+              <strong>{{localize "DRAMADIRECTOR.steps.spatial"}}</strong>
+              <span class="dd-steps-realistic-desc">{{localize "DRAMADIRECTOR.steps.spatialDesc"}}</span>
+            </div>
+          </div>
+          <label class="dd-steps-switch">
+            <input type="checkbox" id="dd-steps-spatial">
+            <span class="dd-switch-track"></span>
+          </label>
+        </div>
+
+        <div class="dd-steps-wall-section" style="margin-top:.6rem">
+          <div class="dd-steps-realistic-label" style="margin-bottom:.35rem">
+            <i class="fas fa-dungeon"></i>
+            <div>
+              <strong>{{localize "DRAMADIRECTOR.steps.walls"}}</strong>
+              <span class="dd-steps-realistic-desc">{{localize "DRAMADIRECTOR.steps.wallsDesc"}}</span>
+            </div>
+          </div>
+          <div class="dd-steps-level-btns">
+            <button type="button" class="dd-steps-wall-btn" data-mode="none">
+              <i class="fas fa-times"></i> {{localize "DRAMADIRECTOR.steps.wallNone"}}
+            </button>
+            <button type="button" class="dd-steps-wall-btn" data-mode="block">
+              <i class="fas fa-ban"></i> {{localize "DRAMADIRECTOR.steps.wallBlock"}}
+            </button>
+            <button type="button" class="dd-steps-wall-btn" data-mode="attenuate">
+              <i class="fas fa-volume-off"></i> {{localize "DRAMADIRECTOR.steps.wallAttenuate"}}
+            </button>
+          </div>
+          <p class="dd-hint-block" id="dd-steps-wall-hint" style="margin-top:.3rem;font-size:.72rem"></p>
+        </div>
+      </div>
+
+      {{!-- Distance --}}
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-ruler-combined"></i> Distance</h3>
+        <div class="dd-steps-dist-info">
+          <div class="dd-steps-dist-row">
+            <i class="fas fa-map-marker-alt" style="color:#5ef"></i>
+            <span class="dd-steps-dist-label">{{localize "DRAMADIRECTOR.steps.distFull"}}</span>
+            <input type="number" id="dd-steps-dist-full" class="dd-input dd-steps-dist-num" min="0" max="200" step="1">
+            <span class="dd-steps-dist-unit">{{localize "DRAMADIRECTOR.steps.units"}}</span>
+          </div>
+          <div class="dd-steps-dist-row">
+            <i class="fas fa-map-marker-alt" style="color:#888"></i>
+            <span class="dd-steps-dist-label">{{localize "DRAMADIRECTOR.steps.distMax"}}</span>
+            <input type="number" id="dd-steps-dist-max" class="dd-input dd-steps-dist-num" min="0" max="500" step="1">
+            <span class="dd-steps-dist-unit">{{localize "DRAMADIRECTOR.steps.units"}}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {{!-- ══ TAB: REGIONS ══ --}}
+    <div class="dd-steps-tab-panel" data-tab-panel="regions" style="display:none">
+
+      {{!-- Sound Regions --}}
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-volume-up"></i> {{localize "DRAMADIRECTOR.steps.soundRegions"}}</h3>
+        <p class="dd-hint-block" style="margin-bottom:.5rem">
+          <i class="fas fa-info-circle"></i> {{localize "DRAMADIRECTOR.steps.soundRegionsHint"}}
+        </p>
+        <div id="dd-steps-sound-regions-list"></div>
+        <div class="dd-steps-region-form">
+          <div class="dd-steps-region-form-row">
+            <input type="text" id="dd-steps-sound-region-name" class="dd-input dd-steps-region-name-inp"
+              placeholder="{{localize "DRAMADIRECTOR.steps.regionNamePlaceholder"}}">
+            <select id="dd-steps-sound-region-surface" class="dd-input dd-steps-region-surf-sel"></select>
+            <button type="button" class="dd-icon-btn" id="dd-steps-sound-region-add" title="{{localize "DRAMADIRECTOR.steps.regionAdd"}}">
+              <i class="fas fa-plus"></i>
+            </button>
+            <button type="button" class="dd-icon-btn" id="dd-steps-sound-region-pick" title="{{localize "DRAMADIRECTOR.steps.regionPick"}}">
+              <i class="fas fa-mouse-pointer"></i>
+            </button>
+          </div>
+        </div>
+        <div class="dd-steps-region-presets-box">
+          <div class="dd-steps-region-presets-header">
+            <i class="fas fa-bookmark"></i>
+            <span>{{localize "DRAMADIRECTOR.steps.regionPresets"}}</span>
+          </div>
+          <div class="dd-steps-preset-save-row">
+            <input type="text" id="dd-steps-sound-region-preset-name" class="dd-input"
+              placeholder="{{localize "DRAMADIRECTOR.steps.regionPresetName"}}" style="flex:1">
+            <button type="button" class="dd-icon-btn" id="dd-steps-sound-region-preset-save"
+              title="{{localize "DRAMADIRECTOR.steps.regionPresetSave"}}">
+              <i class="fas fa-save"></i>
+            </button>
+          </div>
+          <div id="dd-steps-sound-region-presets-list"></div>
+        </div>
+      </div>
+
+      {{!-- Distance Regions --}}
+      <div class="dd-panel-section">
+        <h3><i class="fas fa-compress-alt"></i> {{localize "DRAMADIRECTOR.steps.distRegions"}}</h3>
+        <p class="dd-hint-block" style="margin-bottom:.5rem">
+          <i class="fas fa-info-circle"></i> {{localize "DRAMADIRECTOR.steps.distRegionsHint"}}
+        </p>
+        <div id="dd-steps-dist-regions-list"></div>
+        <div class="dd-steps-region-form">
+          <div class="dd-steps-region-form-row">
+            <input type="text" id="dd-steps-dist-region-name" class="dd-input dd-steps-region-name-inp"
+              placeholder="{{localize "DRAMADIRECTOR.steps.regionNamePlaceholder"}}">
+          </div>
+          <div class="dd-steps-region-form-row dd-steps-region-dist-row">
+            <span class="dd-steps-region-dist-label">
+              <i class="fas fa-map-marker-alt" style="color:#5ef"></i>
+              {{localize "DRAMADIRECTOR.steps.distFull"}}
+            </span>
+            <input type="number" id="dd-steps-dist-region-full" class="dd-input dd-steps-dist-num" min="0" max="200" step="1" placeholder="—">
+            <span class="dd-steps-dist-unit">{{localize "DRAMADIRECTOR.steps.units"}}</span>
+            <span class="dd-steps-region-dist-sep"></span>
+            <span class="dd-steps-region-dist-label">
+              <i class="fas fa-map-marker-alt" style="color:#888"></i>
+              {{localize "DRAMADIRECTOR.steps.distMax"}}
+            </span>
+            <input type="number" id="dd-steps-dist-region-max" class="dd-input dd-steps-dist-num" min="0" max="500" step="1" placeholder="—">
+            <span class="dd-steps-dist-unit">{{localize "DRAMADIRECTOR.steps.units"}}</span>
+            <button type="button" class="dd-icon-btn" id="dd-steps-dist-region-add"
+              title="{{localize "DRAMADIRECTOR.steps.regionAdd"}}">
+              <i class="fas fa-plus"></i>
+            </button>
+            <button type="button" class="dd-icon-btn" id="dd-steps-dist-region-pick"
+              title="{{localize "DRAMADIRECTOR.steps.regionPick"}}">
+              <i class="fas fa-mouse-pointer"></i>
+            </button>
+          </div>
+          <p class="dd-hint-block" style="font-size:.7rem;margin-top:.25rem;opacity:.7">
+            <i class="fas fa-info-circle"></i> {{localize "DRAMADIRECTOR.steps.distRegionsFieldHint"}}
+          </p>
+        </div>
+        <div class="dd-steps-region-presets-box">
+          <div class="dd-steps-region-presets-header">
+            <i class="fas fa-bookmark"></i>
+            <span>{{localize "DRAMADIRECTOR.steps.regionPresets"}}</span>
+          </div>
+          <div class="dd-steps-preset-save-row">
+            <input type="text" id="dd-steps-dist-region-preset-name" class="dd-input"
+              placeholder="{{localize "DRAMADIRECTOR.steps.regionPresetName"}}" style="flex:1">
+            <button type="button" class="dd-icon-btn" id="dd-steps-dist-region-preset-save"
+              title="{{localize "DRAMADIRECTOR.steps.regionPresetSave"}}">
+              <i class="fas fa-save"></i>
+            </button>
+          </div>
+          <div id="dd-steps-dist-region-presets-list"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
